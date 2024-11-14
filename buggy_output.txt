@@ -1,0 +1,20 @@
+harr1003@data:~/cs408/project-3-banerj50$ python3 framework.py -p ./bin/bftpdClean -f ./testing_environment/testcases/test_input_1.txt -v
+CONFIG: /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment/configurations/bftpd.conf
+COMMAND: ['user cs408', 'pass cs408', 'quit']
+Running test with:
+Binary: /u/riker/u90/harr1003/cs408/project-3-banerj50/bin/bftpdClean
+Config file: /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment/configurations/bftpd.conf
+Test commands: ['user cs408', 'pass cs408', 'quit']
+Cleaning up any existing BFTPD processes...
+Executing command: /u/riker/u90/harr1003/cs408/project-3-banerj50/bin/bftpdClean -c /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment/configurations/bftpd.conf -D
+Waiting for server to start...
+Server banner: 220 bftpd 5.6 at 127.0.0.1 ready.
+Sending command: user cs408
+Received response: 331 Password please.
+Sending command: pass cs408
+Received response: 530 Anonymous user not allowed.
+Sending command: quit
+Received response: 500 Unknown command: "qui"
+Test failed
+Expected: ['220 bftpd 5.6 at 127.0.0.1 ready.', '331 Password please.', '230 User logged in.', '221 See you later...']
+Actual: ['220 bftpd 5.6 at 127.0.0.1 ready.', '331 Password please.', '530 Anonymous user not allowed.', '500 Unknown command: "qui"']
