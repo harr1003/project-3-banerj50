@@ -9,7 +9,6 @@ import socket
 import signal
 
 def cleanup_existing_processes():
-    """Kill any existing BFTPD processes"""
     try:
         os.system("ps -u $USER | grep bftpd | grep -v grep | awk '{print $1}' | xargs -r kill -9")
         time.sleep(1)  # Give processes time to clean up
@@ -45,7 +44,7 @@ def run_test(binary, config_file, test_commands, verbose=False):
     if verbose:
         print(f"Executing command: {executeLine}")
         
-    # Start the server with full output capture
+    # start the server with full output capture
     proc = subprocess.Popen(
         executeLine,
         shell=True,
