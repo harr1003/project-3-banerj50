@@ -71,7 +71,7 @@ def run_test(binary, config_file, test_commands, verbose=False):
         try:
             if verbose and attempt > 0:
                 print(f"Connection attempt {attempt + 1}...")
-            telnet = telnetlib.Telnet("localhost", 10566, timeout=5)
+            telnet = telnetlib.Telnet("localhost", 10566)
             break
         except ConnectionRefusedError:
             if attempt == max_retries - 1:
@@ -87,7 +87,7 @@ def run_test(binary, config_file, test_commands, verbose=False):
     output_log = []
     try:
         # Read initial banner
-        initial_response = telnet.read_until(b"\n", timeout=3).decode('ascii').strip()
+        initial_response = telnet.read_until(b"\n").decode('ascii').strip()
         output_log.append(initial_response)
         if verbose:
             print(f"Server banner: {initial_response}")
@@ -95,8 +95,9 @@ def run_test(binary, config_file, test_commands, verbose=False):
         for command in test_commands:
             if verbose:
                 print(f"Sending command: {command}")
-            telnet.write(command.encode('ascii') + b"\n")
-            response = telnet.read_until(b"\n", timeout=3).decode('ascii').strip()
+            telnet.write((command + "\r\n").encode('ascii'))
+            print(f"Sending raw command: {repr(command)}")
+            response = telnet.read_until(b"\n", timeout=20).decode('ascii').strip()
             output_log.append(response)
             if verbose:
                 print(f"Received response: {response}")
@@ -116,6 +117,7 @@ def run_test(binary, config_file, test_commands, verbose=False):
 def get_config_path(config_file):
     """Get the full path to the configuration file"""
     config_path = os.path.join(os.getcwd(), "testing_environment", "configurations", config_file)
+    print(f"config path: {config_path}")
     if os.path.exists(config_path):
         return config_path
     
@@ -132,6 +134,7 @@ def read_test(file_path):
                 sys.exit(2)
                 
             config_file = lines[0].strip()
+            print(f"Config file curr: {config_file}")
             config_file = get_config_path(config_file)
                 
             test_commands = []
