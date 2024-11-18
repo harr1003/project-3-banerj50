@@ -1,0 +1,5 @@
+bftpd.conf
+1:user cs408
+1:pass cs408
+1:size /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment
+1:quit

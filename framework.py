@@ -95,7 +95,7 @@ def run_test(binary, config_file, test_commands, verbose=False):
         for command in test_commands:
             if verbose:
                 print(f"Sending command: {command}")
-            telnet.write((command + "\r\n").encode('ascii'))
+            telnet.write((command +"\r\n").encode('ascii'))
             print(f"Sending raw command: {repr(command)}")
             response = telnet.read_until(b"\n", timeout=20).decode('ascii').strip()
             output_log.append(response)

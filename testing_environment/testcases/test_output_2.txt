@@ -1,0 +1,7 @@
+220 bftpd 5.6 at 127.0.0.1 ready.
+331 Password please.
+230 User logged in.
+257 "/u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment" is the current working directory.
+213-Status of /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment:
+drwx------   4 812533   812533   4096 Nov 18 15:57 /u/riker/u90/harr1003/cs408/project-3-banerj50/testing_environment
+221 See you later...
